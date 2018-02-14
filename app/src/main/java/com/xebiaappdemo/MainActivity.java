@@ -2,23 +2,32 @@ package com.xebiaappdemo;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.xebiaappdemo.adapter.WeatherListAdapter;
 import com.xebiaappdemo.model.City;
+import com.xebiaappdemo.model.WeatherList;
 import com.xebiaappdemo.mvp.Contract;
 import com.xebiaappdemo.mvp.ModelImpl;
 import com.xebiaappdemo.mvp.PresenterImpl;
 import com.xebiaappdemo.utility.Utils;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements Contract.View{
     private ProgressBar loader;
     private RecyclerView recyclerView;
     private TextView cityName,countryName,population;
     private Contract.Presenter mPresenter;
+    private WeatherListAdapter adapter;
+    private LinearLayoutManager layoutManager;
+    private List<WeatherList> weatherList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,6 +40,8 @@ public class MainActivity extends AppCompatActivity implements Contract.View{
         cityName= (TextView) findViewById(R.id.cityNameText);
         countryName= (TextView) findViewById(R.id.cityCountryText);
         population= (TextView) findViewById(R.id.cityPopulationText);
+
+        setupRecyclerView();
 
   // Todo hit request on page load at first time
         if(Utils.isInternetConnected(this))
@@ -50,8 +61,10 @@ public class MainActivity extends AppCompatActivity implements Contract.View{
     }
 
     @Override
-    public void updateListUI() {
-
+    public void updateListUI(List<WeatherList> list) {
+       weatherList.clear();
+       weatherList.addAll(list);
+       adapter.notifyDataSetChanged();
     }
 
     @Override
@@ -69,5 +82,14 @@ public class MainActivity extends AppCompatActivity implements Contract.View{
     @Override
     protected void onDestroy() {
         super.onDestroy();
+    }
+
+  // Todo setup RecyclerView
+    private void setupRecyclerView(){
+        weatherList=new ArrayList<>();
+        layoutManager=new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+        adapter=new WeatherListAdapter(this,weatherList);
+        recyclerView.setAdapter(adapter);
     }
 }

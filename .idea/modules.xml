@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/XebiaAppDemo.iml" filepath="$PROJECT_DIR$/XebiaAppDemo.iml" />
+      <module fileurl="file://F:\XebiaDemoApp\XebiaAppDemo.iml" filepath="F:\XebiaDemoApp\XebiaAppDemo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/XebiaDemoApp.iml" filepath="$PROJECT_DIR$/XebiaDemoApp.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://F:\XebiaDemoApp\app\app.iml" filepath="F:\XebiaDemoApp\app\app.iml" />
     </modules>
   </component>
 </project>

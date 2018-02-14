@@ -22,6 +22,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -79,6 +80,39 @@ public class ModelImpl implements Contract.Model {
 
                                     responseModel.setCity(cityModel);
 
+                               // Todo filling list data
+                                    List<WeatherList> weatherList=new ArrayList<>();
+                                    JSONArray listJsonArray=response.getJSONArray("list");
+                                    int size=listJsonArray.length();
+                                    JSONObject listJsonObj=null,tempJsonObj;
+                                    for(int i=0;i<size;i++){
+                                        listJsonObj=listJsonArray.getJSONObject(i);
+                                        weatherListModel=new WeatherList();
+
+                                        tempModel=new Temp();
+                                        tempJsonObj=listJsonObj.getJSONObject("temp");
+                                        tempModel.setDay(tempJsonObj.getString("day"));
+                                        tempModel.setMin(tempJsonObj.getString("min"));
+                                        tempModel.setMax(tempJsonObj.getString("max"));
+                                        tempModel.setNight(tempJsonObj.getString("night"));
+                                        tempModel.setEve(tempJsonObj.getString("eve"));
+                                        tempModel.setMorn(tempJsonObj.getString("morn"));
+                                        weatherListModel.setTemp(tempModel);
+
+                                        weatherListModel.setPressure(listJsonObj.getString("pressure"));
+                                        weatherListModel.setHumidity(listJsonObj.getString("humidity"));
+
+                                        JSONArray weatherJsonArr=listJsonObj.getJSONArray("weather");
+                                        JSONObject weatherJsonObj=weatherJsonArr.getJSONObject(0);
+                                        weatherModel=new Weather();
+                                        weatherModel.setMain(weatherJsonObj.getString("main"));
+                                        weatherModel.setDescription(weatherJsonObj.getString("description"));
+                                        weatherListModel.setWeather(weatherModel);
+
+                                       weatherList.add(weatherListModel);
+
+                                    }
+                                    responseModel.setList(weatherList);
                                     listener.onSuccess(responseModel);
 
                                 } catch (JSONException e) {

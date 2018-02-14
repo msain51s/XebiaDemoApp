@@ -1,5 +1,7 @@
 package com.xebiaappdemo.model;
 
+import java.util.List;
+
 /**
  * Created by Administrator on 2/14/2018.
  */
@@ -11,7 +13,15 @@ public class WeatherResponse {
 
     private String cod;
 
-    private WeatherList[] list;
+    public List<WeatherList> getList() {
+        return list;
+    }
+
+    public void setList(List<WeatherList> list) {
+        this.list = list;
+    }
+
+    private List<WeatherList> list;
 
     private City city;
 
@@ -43,16 +53,6 @@ public class WeatherResponse {
     public void setCod (String cod)
     {
         this.cod = cod;
-    }
-
-    public WeatherList[] getList ()
-    {
-        return list;
-    }
-
-    public void setList (WeatherList[] list)
-    {
-        this.list = list;
     }
 
     public City getCity ()

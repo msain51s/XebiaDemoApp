@@ -211,5 +211,44 @@
                 android:background="@color/grey"/>
         </RelativeLayout>
     </LinearLayout>
+<!--Todo pressure text layout-->
+ <TextView
+     android:id="@+id/pressure_text"
+     android:layout_width="wrap_content"
+     android:layout_height="wrap_content"
+     android:text="Pressure : "
+     android:textColor="@color/black"
+     android:textSize="@dimen/title_text_size"
+     android:layout_below="@+id/temp_layout"
+     android:layout_marginTop="5dp"/>
+    <TextView
+        android:id="@+id/pressure_value_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/description_text_size"
+        android:layout_below="@+id/temp_layout"
+        android:layout_toRightOf="@+id/pressure_text"
+        android:layout_marginTop="5dp"/>
+
+    <!--Todo humadity text layout-->
+    <TextView
+        android:id="@+id/humidity_value_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/description_text_size"
+        android:layout_below="@+id/temp_layout"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="5dp"/>
+    <TextView
+        android:id="@+id/humidity_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Humidity : "
+        android:textColor="@color/black"
+        android:textSize="@dimen/title_text_size"
+        android:layout_below="@+id/temp_layout"
+        android:layout_toLeftOf="@+id/humidity_value_text"
+        android:layout_marginTop="5dp"/>
+
 </RelativeLayout>
 </android.support.v7.widget.CardView>

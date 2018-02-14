@@ -33,6 +33,7 @@ public class PresenterImpl implements Presenter,Contract.Model.OnLoadListener {
        if(mView!=null) {
            mView.dismissLoader();
            mView.updateCityInfoUI(response.getCity());
+           mView.updateListUI(response.getList());
        }
     }
 

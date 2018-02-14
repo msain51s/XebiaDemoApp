@@ -17,7 +17,7 @@ public class WeatherList {
 
     private String deg;
 
-    private Weather[] weather;
+    private Weather weather;
 
     private Temp temp;
 
@@ -81,12 +81,12 @@ public class WeatherList {
         this.deg = deg;
     }
 
-    public Weather[] getWeather ()
+    public Weather getWeather ()
     {
         return weather;
     }
 
-    public void setWeather (Weather[] weather)
+    public void setWeather (Weather weather)
     {
         this.weather = weather;
     }
