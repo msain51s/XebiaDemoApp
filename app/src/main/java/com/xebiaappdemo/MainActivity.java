@@ -44,10 +44,7 @@ public class MainActivity extends AppCompatActivity implements Contract.View{
         setupRecyclerView();
 
   // Todo hit request on page load at first time
-        if(Utils.isInternetConnected(this))
-            mPresenter.getData();
-        else
-            showToastMessage("Internet is not connected, please check your connection.");
+        hitRequest();
     }
 
     @Override
@@ -91,5 +88,15 @@ public class MainActivity extends AppCompatActivity implements Contract.View{
         recyclerView.setLayoutManager(layoutManager);
         adapter=new WeatherListAdapter(this,weatherList);
         recyclerView.setAdapter(adapter);
+    }
+
+    public void hitRequest(){
+        if(Utils.isInternetConnected(this))
+            mPresenter.getData();
+        else
+            showToastMessage("Internet is not connected, please check your connection.");
+    }
+    public void performRefresh(View view) {
+        hitRequest();
     }
 }
