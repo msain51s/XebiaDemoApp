@@ -1,5 +1,6 @@
 package com.xebiaappdemo.mvp;
 
+import com.xebiaappdemo.db.DatabaseHelper;
 import com.xebiaappdemo.model.WeatherResponse;
 import com.xebiaappdemo.mvp.Contract.Presenter;
 

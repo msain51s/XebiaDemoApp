@@ -7,6 +7,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.xebiaappdemo.db.DatabaseHelper;
 import com.xebiaappdemo.model.City;
 import com.xebiaappdemo.model.Coord;
 import com.xebiaappdemo.model.Temp;
@@ -113,7 +114,23 @@ public class ModelImpl implements Contract.Model {
 
                                     }
                                     responseModel.setList(weatherList);
-                                    listener.onSuccess(responseModel);
+
+                            //Todo deleting table data before inserting new Data
+                                    if(responseModel.getList().size()>0)
+                                        DatabaseHelper.getInstance(context).deleteInfoToDB();
+
+                           // Todo Inserting data to Database
+                                    for(WeatherList mo:responseModel.getList()) {
+                                        DatabaseHelper.getInstance(context).insertInfoToDB(responseModel.getCity().getName(),
+                                                responseModel.getCity().getCountry(),responseModel.getCity().getPopulation(),mo);
+                                    }
+
+                          //  Todo Getting data from Database and updating the UI
+                                      responseModel=new WeatherResponse();
+                                      responseModel.setCity(DatabaseHelper.getInstance(context).getCityInfoFromDB());
+                                      responseModel.setList(DatabaseHelper.getInstance(context).getWeatherListFromDB());
+                                     listener.onSuccess(responseModel);
+
 
                                 } catch (JSONException e) {
                                     e.printStackTrace();

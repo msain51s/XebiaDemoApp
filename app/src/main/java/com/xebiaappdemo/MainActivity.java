@@ -10,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.xebiaappdemo.adapter.WeatherListAdapter;
+import com.xebiaappdemo.db.DatabaseHelper;
 import com.xebiaappdemo.model.City;
 import com.xebiaappdemo.model.WeatherList;
 import com.xebiaappdemo.mvp.Contract;
@@ -66,9 +67,11 @@ public class MainActivity extends AppCompatActivity implements Contract.View{
 
     @Override
     public void updateCityInfoUI(City city) {
-        cityName.setText("City : "+city.getName());
-        countryName.setText("Country : "+city.getCountry());
-        population.setText("Population : "+city.getPopulation());
+        if(city!=null) {
+            cityName.setText("City : " + city.getName());
+            countryName.setText("Country : " + city.getCountry());
+            population.setText("Population : " + city.getPopulation());
+        }
     }
 
     @Override
@@ -79,6 +82,7 @@ public class MainActivity extends AppCompatActivity implements Contract.View{
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        DatabaseHelper.getInstance(this).closeConnecion();
     }
 
   // Todo setup RecyclerView
@@ -99,4 +103,5 @@ public class MainActivity extends AppCompatActivity implements Contract.View{
     public void performRefresh(View view) {
         hitRequest();
     }
+
 }
