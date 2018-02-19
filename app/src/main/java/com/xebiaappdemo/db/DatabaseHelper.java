@@ -80,8 +80,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             db = dbHelper.getWritableDatabase();
         }
     }
-    // be sure to call this method by: DatabaseHelper.getInstance.closeConnecion() when application is closed by    somemeans most likely
-    // onDestroy method of application
 
     public synchronized void closeConnecion() {
         if(dbHelper!=null){
@@ -112,7 +110,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      executeDMLQuery(deleteQuery);
      Log.d("deleteQuery", deleteQuery);
  }
- // Todo getting Citi Info from DB
+ // Todo getting City Info from DB
     public City getCityInfoFromDB(){
         String selectSql = "Select "+DBTable.KEY_CITY_NAME_COLUMN+","+DBTable.KEY_COUNTRY_NAME_COLUMN +","
                            +DBTable.KEY_POPULATION_COLUMN+" from "+DBTable.TABLE_NAME;
